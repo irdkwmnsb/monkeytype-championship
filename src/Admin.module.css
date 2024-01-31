@@ -1,0 +1,31 @@
+.startForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.gameRow {
+    display: flex;
+    gap: 5px;
+}
+
+.activeRow {
+    background-color: lightgreen;
+}
+
+.video {
+    width: 100%;
+}
+
+.eventHeader :not(:first-child) {
+    margin-left: 5px;
+}
+
+.viewer {
+    display: flex;
+    align-items: flex-start;
+}
+
+.videoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
