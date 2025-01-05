@@ -5,7 +5,7 @@ import {PlayerContext, PlayerState} from "./PlayerContext.tsx";
 import Game from "./Game.tsx";
 import {useCapture} from "./capture.ts";
 
-export const signallingUrl = "wss://monkeytype.kbats.ru"
+export const signallingUrl = "wss://grabber.kbats.ru"
 
 export const App = () => {
     const [username, setUsername] = useState("");
@@ -37,6 +37,7 @@ export const App = () => {
         {playerState !== undefined && captureState !== "active" &&
             <div>
                 Пожалуйста разрешите доступ к вебкамере и к полному экрану.
+                ({captureState})
             </div>
         }
         {playerState !== undefined && captureState === "declinded" &&

@@ -11,11 +11,10 @@ const desktopConstraint = {
 
 const detectStreams = async () => {
     const detectedStreams: Record<string, MediaStream> = {};
-
     const webcamStream = await navigator.mediaDevices.getUserMedia({
         video: webcamConstraint,
         audio: webcamAudioConstraint,
-    }).catch(() => undefined);
+    });
     if (webcamStream) {
         detectedStreams["webcam"] = webcamStream;
     }
@@ -59,9 +58,14 @@ export const useCapture = (signallingUrl: string): {
 export const capture = async (peerName: string, signallingUrl: string, updateState: (status: State) => void = (_) => {
 }) => {
     updateState("detecting");
-
-    const streams = await detectStreams();
-    if(streams["desktop"] === undefined) {
+    let streams: Record<string, MediaStream> = {};
+    try {
+        streams = await detectStreams();
+        if(streams["desktop"] === undefined) {
+            updateState("declinded");
+            return;
+        }
+    } catch (e) {
         updateState("declinded");
         return;
     }
